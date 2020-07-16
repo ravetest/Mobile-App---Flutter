@@ -15,7 +15,7 @@ class _SplashScreen extends State<SplashScreen>{
   Widget build(BuildContext context){
     //implement build
     return Scaffold(
-      backgroundColor: Color(0xffffff),
+      backgroundColor: Color(0xffffffff),
       body:Center(
         child: Column(
           mainAxisAlignment : MainAxisAlignment.center,
@@ -27,7 +27,7 @@ class _SplashScreen extends State<SplashScreen>{
                   children: <Widget>[
                     MyImage(),
                     Text("Mera Village", style: TextStyle(fontSize:25
-                    ,fontStyle: FontStyle.italic, color: Color(0xffff2fc3)),
+                    , color: Color(0xff00bcd4)),
                     )
                   ],
                 )
@@ -39,8 +39,8 @@ class _SplashScreen extends State<SplashScreen>{
                   children: <Widget>[
                     CircularProgressIndicator(),
                     SizedBox(height:20,),
-                    Text("One market one price", style: TextStyle(fontSize: 25,
-                        fontStyle: FontStyle.italic,))
+                    Text("Ek Dukan Ek Rate", style: TextStyle(fontSize: 25,
+                        fontStyle: FontStyle.italic,color: Colors.cyan))
                 ],
                 )
             ),
