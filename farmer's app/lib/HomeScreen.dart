@@ -105,21 +105,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             ListTile(
-              title: Text("My Favorite"),
-              leading: Icon(Icons.favorite),
+              title: Text("Price List"),
+              leading: Icon(Icons.list),
               onTap: () {
                 //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MyFavorite()));
               },
             ),
 
             ListTile(
-              title: Text("My Profile"),
-              leading: Icon(Icons.person),
+              title: Text("Weather Forecast"),
+              leading: Icon(Icons.cloud),
             ),
-            Divider(),
 
             ListTile(
-              title: Text("Contact US"),
+              title: Text("Loans"),
+              leading: Icon(Icons.attach_money),
+            ),
+
+            ListTile(
+              title: Text("Complaint"),
               leading: Icon(Icons.email),
             ) //line
           ],

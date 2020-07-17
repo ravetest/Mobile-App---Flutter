@@ -164,7 +164,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                   },
 
 
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     labelText: "Password",
                     border: OutlineInputBorder(
