@@ -6,7 +6,6 @@ Atmanirbhar App Making Project
 
 - Firebase SDKs 
 - Cloud Firestore
-- Cloud Messaging
 
 ## Tools
 - Flutter v1.22.6 SDK (To be upgraded to the latest Flutter SDK in future)
