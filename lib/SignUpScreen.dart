@@ -12,22 +12,21 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreen extends State<SignUpScreen> {
-  bool authState=false;
-  String email = "", password = "";
+  bool authState = false;
+  String? email = "", password = "";
   var _formKey = GlobalKey<FormState>();
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> register() async {
-
-    await auth.createUserWithEmailAndPassword(
-        email: email.trim(), password: password).then((value){
-      Navigator.push(context, MaterialPageRoute(
-          builder: (BuildContext context)=>HomeScreen(value.user.email)
-      ));
+    await auth
+        .createUserWithEmailAndPassword(email: email!.trim(), password: password!)
+        .then((value) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => HomeScreen(value.user!.email)));
     });
-
-
   }
 
   @override
@@ -67,7 +66,7 @@ class _SignUpScreen extends State<SignUpScreen> {
               ),
               decoration: BoxDecoration(
                 borderRadius:
-                BorderRadius.only(bottomRight: Radius.circular(150)),
+                    BorderRadius.only(bottomRight: Radius.circular(150)),
                 color: Color(0xff00bcd4),
               ),
             ),
@@ -77,7 +76,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                 padding: EdgeInsets.only(top: 50, right: 20, left: 20),
                 child: TextFormField(
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter user name";
                     }
                     return null;
@@ -88,19 +87,19 @@ class _SignUpScreen extends State<SignUpScreen> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                   ),
                 ),
               ),
@@ -112,35 +111,32 @@ class _SignUpScreen extends State<SignUpScreen> {
                 child: TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter Email";
                     } else {
                       email = value;
                     }
                     return null;
                   },
-
-
-
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     labelText: "Email",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                   ),
                 ),
               ),
@@ -153,7 +149,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                   obscureText: true,
                   autocorrect: false,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter password";
                     } else if (value.length < 8) {
                       return "your password shouldn't be less than 8 character";
@@ -162,27 +158,25 @@ class _SignUpScreen extends State<SignUpScreen> {
                     }
                     return null;
                   },
-
-
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     labelText: "Password",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide:
-                        BorderSide(color: Color(0xff00bcd4), width: 1)),
+                            BorderSide(color: Color(0xff00bcd4), width: 1)),
                   ),
                 ),
               ),
@@ -194,7 +188,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: RaisedButton(
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       register();
                     }
                   },
@@ -222,34 +216,34 @@ class _SignUpScreen extends State<SignUpScreen> {
             ),
             Center(
                 child: Column(
-                  children: <Widget>[
-                    Text(
-                      "You already have an account ?",
-                      style: TextStyle(color: Colors.cyan),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(
-                              builder: (BuildContext context) => LogInScreen()));
-                        },
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              "Log In",
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                            Container(
-                              width: 45,
-                              height: 1,
-                              color: Colors.blue,
-                            ),
-                          ],
-                        ))
-                  ],
-                ))
+              children: <Widget>[
+                Text(
+                  "You already have an account ?",
+                  style: TextStyle(color: Colors.cyan),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                MaterialButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (BuildContext context) => LogInScreen()));
+                    },
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          "Log In",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        Container(
+                          width: 45,
+                          height: 1,
+                          color: Colors.blue,
+                        ),
+                      ],
+                    ))
+              ],
+            ))
           ],
         ),
       ),
