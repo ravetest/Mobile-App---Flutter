@@ -3,9 +3,9 @@ import 'SplashScreen.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     //implement build
     return new MaterialApp(
       //remove banner from screen
@@ -14,4 +14,3 @@ class MyApp extends StatelessWidget{
     );
   }
 }
-

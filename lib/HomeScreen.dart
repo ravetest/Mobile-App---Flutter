@@ -9,7 +9,7 @@ import 'Data.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
-  String currentEmail;
+  String? currentEmail;
 
   HomeScreen(this.currentEmail);
 
@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String currentEmail;
+  String? currentEmail;
   List<Data> dataList = [];
 
   _HomeScreenState(this.currentEmail);
@@ -27,36 +27,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> logOut() async {
     auth.signOut().then((value) {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => LogInScreen()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => LogInScreen()));
     });
   }
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    DatabaseReference referenceData = FirebaseDatabase.instance.reference().child("Data");
-    referenceData.once().then((DataSnapshot dataSnapShot){
+    DatabaseReference referenceData =
+        FirebaseDatabase.instance.reference().child("Data");
+    referenceData.once().then((DataSnapshot dataSnapShot) {
       dataList.clear();
       var keys = dataSnapShot.value.keys;
       var values = dataSnapShot.value;
 
-      for(var key in keys){
+      for (var key in keys) {
         Data data = new Data(
-          values [key]["imgUrl"],
-          values [key]["name"],
-          values [key]["material"],
-          values [key]["price"],
+          values[key]["imgUrl"],
+          values[key]["name"],
+          values[key]["material"],
+          values[key]["price"],
         );
         dataList.add(data);
       }
-      setState(() {
-        
-      });
+      setState(() {});
     });
   }
 
@@ -68,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color(0xff00bcd4),
         title: Text("Home"),
         actions: <Widget>[
-          FlatButton.icon(
+          TextButton.icon(
               onPressed: () {
                 logOut();
               },
@@ -87,11 +83,18 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: <Widget>[
                   Padding(padding: EdgeInsets.only(top: 30)),
-                  Image(image: AssetImage("images/DedSec_logo.png"),
+                  Image(
+                    image: AssetImage("images/DedSec_logo.png"),
                     height: 90,
-                    width: 90,),
-                  SizedBox(height: 10,),
-                  Text(currentEmail, style: TextStyle(color: Colors.white),)
+                    width: 90,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    currentEmail!,
+                    style: TextStyle(color: Colors.white),
+                  )
                 ],
               ),
             ),
@@ -99,8 +102,10 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text("Upload"),
               leading: Icon(Icons.cloud_upload),
               onTap: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (BuildContext context) => UploadData()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => UploadData()));
               },
             ),
 
@@ -129,15 +134,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: dataList.length== 0? Center(child: Text("No data available now",style: TextStyle(fontSize: 30),)):ListView.builder(
-          itemCount: dataList.length,
-          itemBuilder: (_,index){
-            return CardUI(dataList[index].imgUrl, dataList[index].name,dataList[index].material,dataList[index].price,);
-          }
-      ),
+      body: dataList.length == 0
+          ? Center(
+              child: Text(
+              "No data available now",
+              style: TextStyle(fontSize: 30),
+            ))
+          : ListView.builder(
+              itemCount: dataList.length,
+              itemBuilder: (_, index) {
+                return CardUI(
+                  dataList[index].imgUrl!,
+                  dataList[index].name!,
+                  dataList[index].material,
+                  dataList[index].price!,
+                );
+              }),
     );
   }
-  Widget CardUI(String imgUrl, String name, String material, String price) {
+
+  Widget CardUI(String imgUrl, String name, String? material, String price) {
     return Card(
       elevation: 7,
       margin: EdgeInsets.all(15),
@@ -148,25 +164,45 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-            Image.network(imgUrl, fit: BoxFit.cover, height: 100,),
-            SizedBox(height: 1,),
-            Text(name, style: TextStyle(color: Colors.black,
-                fontSize: 25,
-                fontWeight: FontWeight.bold),),
-            SizedBox(height: 1,),
+            Image.network(
+              imgUrl,
+              fit: BoxFit.cover,
+              height: 100,
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            Text(
+              name,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 1,
+            ),
             Text("material:- $material"),
-            SizedBox(height: 1,),
+            SizedBox(
+              height: 1,
+            ),
             Container(
               width: double.infinity,
-              child: Text(price, style: TextStyle(
-                  color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.right,),
+              child: Text(
+                price,
+                style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.right,
+              ),
             ),
-            SizedBox(height: 1,),
+            SizedBox(
+              height: 1,
+            ),
           ],
         ),
       ),
     );
   }
 }
-
